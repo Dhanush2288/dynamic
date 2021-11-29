@@ -1,0 +1,313 @@
+<mat-tab-group class="mat-elevation-z8">
+  <mat-tab label="Data">
+    <div class="tothat">
+      <div class="margine">
+        <div class="topfilter">
+          <form [formGroup]="userModel" (ngsubmit)="(ngOnSubmit)">
+            <mat-form-field>
+              <mat-label>enter projectID</mat-label>
+              <mat-select formControlName="projectID">
+                <mat-option *ngFor="let result of ID" [value]="result">
+                  {{ result }}
+                  <button mat-icon-button [matMenuTriggerFor]="menu" class="btnright" aria-label="Example icon-button with a menu">
+                    <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="confirmBox(result)">
+                      <mat-icon>delete</mat-icon>
+                      <span>Delete</span>
+                    </button>
+                  </mat-menu>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button
+              type="submit"
+              class="pobtn"
+              mat-raised-button
+              (click)="ngOnSubmit()"
+              [disabled]="userModel.pristine || userModel.invalid"
+            >
+              Submit
+            </button>
+          </form>
+
+          <div class="calendar row">
+            <div id="Time-container1">
+              <form [formGroup]="userid" class="form-signin calendarform phone">
+                <input
+                  id="date777"
+                  class="dh"
+                  matInput
+                  placeholder="Date"
+                  formControlName="SelectedDate"
+                  [matDatepicker]="picker"
+                  display.dateInput
+                  (dateChange)="onSelect()"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+              </form>
+            </div>
+            <mat-datepicker #picker> </mat-datepicker>
+          </div>
+          <div class="calendar row">
+            <div id="Time-container1">
+              <form [formGroup]="userid" class="form-signin calendarform phone">
+                <input
+                  id="date777"
+                  class="dh"
+                  matInput
+                  placeholder="Date"
+                  formControlName="EndDate2"
+                  [matDatepicker]="picker2"
+                  display.dateInput
+                  (dateChange)="onSelect()"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker2"
+                ></mat-datepicker-toggle>
+              </form>
+            </div>
+            <mat-datepicker #picker2> </mat-datepicker>
+          </div>
+        </div>
+        <div class="filt">
+          <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Text" />
+          </mat-form-field>
+          <button
+            type="button"
+            class="ml-3 px-3 btn btn-dark"
+            (click)="exportToExcel()"
+          >
+            Export
+          </button>
+          <mat-slide-toggle
+            class="ml-4"
+            [checked]="isSlideChecked"
+            (change)="toggleChanges($event)"
+            >Sort Table Export</mat-slide-toggle
+          >
+        </div>
+
+        <div>
+          <table
+            mat-table
+            [dataSource]="dataSource"
+            matSort
+            id="dd"
+            style="padding: 20px"
+          >
+            <ng-container
+              *ngFor="let anyname of allKeys"
+              matColumnDef="{{ anyname }}"
+            >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                {{ anyname }}
+              </th>
+              <p *ngIf="anyname == 'createdAT'; else elseifBlock">
+                <td mat-cell *matCellDef="let row">
+                  {{ row[anyname] | date: "yyyy-MM-dd hh:mm:ss" }}
+                </td>
+              </p>
+              <ng-template #elseifBlock>
+                <p>
+                  <td
+                    mat-cell
+                    *matCellDef="let row"
+                    [attr.data-label]="anyname"
+                  >
+                    {{ row[anyname] }}
+                  </td>
+                </p>
+              </ng-template>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+
+          <table class="nod" *ngIf="loading == true">
+            <p class="nodata">no data found</p>
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Audio">
+    <div class="tothat">
+      <div class="margine">
+        <div class="topfilter">
+          <form [formGroup]="userModel" (ngsubmit)="(ngOnSubmit1)">
+            <mat-form-field>
+              <mat-label>enter projectID</mat-label>
+              <mat-select formControlName="projectID1">
+                <mat-option *ngFor="let result of ID1" [value]="result">
+                  {{ result }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button
+              type="submit"
+              class="pobtn"
+              mat-raised-button
+              (click)="ngOnSubmit1()"
+              [disabled]="userModel.pristine || userModel.invalid"
+            >
+              Submit
+            </button>
+          </form>
+<!--
+          <div class="calendar row">
+            <div id="Time-container1">
+              <form [formGroup]="userid" class="form-signin calendarform phone">
+                <input
+                  id="date777"
+                  class="dh"
+                  matInput
+                  placeholder="Date"
+                  formControlName="SelectedDate1"
+                  [matDatepicker]="picker1"
+                  display.dateInput
+                  (dateChange)="onSelect1()"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker1"
+                ></mat-datepicker-toggle>
+              </form>
+            </div>
+            <mat-datepicker #picker1> </mat-datepicker>
+          </div> -->
+        </div>
+        <table
+          mat-table
+          #sortCol2="matSort"
+          [dataSource]="dataSource1"
+          class="cvvc"
+          matSort
+        >
+          <ng-container matColumnDef="projectID">
+            <th mat-header-cell *matHeaderCellDef>projectID</th>
+            <td mat-cell *matCellDef="let element">{{ element.projectID }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="audioname">
+            <th mat-header-cell *matHeaderCellDef>audio name</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.audioname }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="audiolink">
+            <th mat-header-cell *matHeaderCellDef>Play</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                class="btn-f"
+                (click)="
+                  openModal(template, element.audiolink, element.audioname)
+                "
+              >
+                play
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="Date">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.createdAt | date: "dd-MM-yyyy" }}
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+        </table>
+      </div>
+    </div>
+
+    <mat-paginator
+      #paginator2
+      [pageSizeOptions]="[5, 10, 25, 100]"
+    ></mat-paginator>
+  </mat-tab>
+</mat-tab-group>
+
+<ng-template #template>
+  <div class="modal-header">
+    <button
+      type="button"
+      class="btn-close close pull-right"
+      aria-label="Close"
+      (click)="closeForm()"
+      (click)="modalRef?.hide()"
+    >
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-6">
+        <h1 class="audiotitle">{{ this.audiotitle }}</h1>
+      </div>
+      <div class="col-6">
+        <div class="po">
+          <button
+            class="btn-e"
+            (click)="justplay()"
+            (keydown.enter)="justplay()"
+          >
+            <i class="fa fa-play play4" *ngIf="playing == false"></i>
+            <i class="fa fa-pause play5" *ngIf="playing == true"></i>
+          </button>
+          <form class="form-chat form-audio-vol" [formGroup]="Audio">
+            <div class="audiovolume">
+              <div class="slider-container2 audio-inp Loo1">
+                <span class="bar1" id="a"
+                  ><span class="fill1" [style.width.%]="this.Audio.value.audio">
+                  </span
+                ></span>
+                <input
+                  type="range"
+                  id="b"
+                  min="0"
+                  max="100"
+                  class="slider1"
+                  formControlName="audio"
+                  (change)="audiochange()"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="dd">
+      <form class="form-chat form-dura" [formGroup]="durationfb">
+        <div class="slider-container">
+          <span class="bar"
+            ><span
+              class="fill"
+              [style.width.%]="this.durationfb.value.poistion1"
+            >
+            </span
+          ></span>
+          <input
+            class="slider"
+            id="b"
+            type="range"
+            min="0"
+            max="100"
+            formControlName="poistion1"
+            (change)="changeduration()"
+          />
+        </div>
+        <p class="poriy1">{{ this.currentTIme }}</p>
+      </form>
+    </div>
+  </div>
+</ng-template>
