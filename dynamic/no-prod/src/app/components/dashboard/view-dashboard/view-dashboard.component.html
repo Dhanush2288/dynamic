@@ -9,9 +9,14 @@
               <mat-select formControlName="projectID">
                 <mat-option *ngFor="let result of ID" [value]="result">
                   {{ result }}
-                  <button mat-icon-button [matMenuTriggerFor]="menu" class="btnright" aria-label="Example icon-button with a menu">
+                  <button
+                    mat-icon-button
+                    [matMenuTriggerFor]="menu"
+                    class="btnright"
+                    aria-label="Example icon-button with a menu"
+                  >
                     <i class="fas fa-ellipsis-v"></i>
-                    </button>
+                  </button>
                   <mat-menu #menu="matMenu">
                     <button mat-menu-item (click)="confirmBox(result)">
                       <mat-icon>delete</mat-icon>
@@ -35,7 +40,7 @@
 
           <div class="calendar row">
             <div id="Time-container1">
-              <form [formGroup]="userid" class="form-signin calendarform phone">
+              <form [formGroup]="userid" class="form-signin calendarform phone ">
                 <input
                   id="date777"
                   class="dh"
@@ -56,7 +61,7 @@
           </div>
           <div class="calendar row">
             <div id="Time-container1">
-              <form [formGroup]="userid" class="form-signin calendarform phone">
+              <form [formGroup]="userid" class="form-signin calendarform phone1">
                 <input
                   id="date777"
                   class="dh"
@@ -150,6 +155,20 @@
               <mat-select formControlName="projectID1">
                 <mat-option *ngFor="let result of ID1" [value]="result">
                   {{ result }}
+                  <button
+                    mat-icon-button
+                    [matMenuTriggerFor]="menu"
+                    class="btnright"
+                    aria-label="Example icon-button with a menu"
+                  >
+                    <i class="fas fa-ellipsis-v"></i>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="confirmBox1(result)">
+                      <mat-icon>delete</mat-icon>
+                      <span>Delete</span>
+                    </button>
+                  </mat-menu>
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -164,7 +183,7 @@
               Submit
             </button>
           </form>
-<!--
+          <!--
           <div class="calendar row">
             <div id="Time-container1">
               <form [formGroup]="userid" class="form-signin calendarform phone">

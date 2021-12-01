@@ -283,4 +283,27 @@ Router.get("/deleteprojectID/:projectID", async function (req, res) {
     }
   }
 });
+Router.get("/deleteaudioprojectID/:projectID", async function (req, res) {
+  console.log("=++++++++++>",req.params.projectID);
+  try {
+    audio.deleteMany({projectID:req.params.projectID})
+    .exec(function (err, collection) {
+      if (err) {
+        res.send({ success: false, data: collection });
+      } else {
+        if(collection.deletedCount=!0){
+          res.send({ success: true, data: collection });         
+        }else{
+          res.send({ success: false, data: collection });
+        }
+      }
+    });
+  } catch (err) {
+    if (err) {
+      return res.status(500).send({
+        message: "File size cannot be larger than 2MB!",
+      });
+    }
+  }
+});
 module.exports = Router;

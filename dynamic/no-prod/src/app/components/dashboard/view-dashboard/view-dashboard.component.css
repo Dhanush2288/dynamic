@@ -11,6 +11,12 @@
   display: block;
   margin-left: 10px;
 }
+.phone{
+  border-right:2px solid gainsboro ;
+}
+.phone1{
+  margin-left: 20px;
+}
 .calendarform{
 display: flex;
 }
@@ -31,7 +37,7 @@ display: flex;
  }
 .tothat{
 border: 1px solid transparent;
-height: 70vh;
+height: 77vh;
 overflow: auto;
 }
 .margine{
@@ -190,4 +196,28 @@ float: right;
 .slider-container2 .slider1::-webkit-slider-thumb:hover {
   background-color: rgb(187, 184, 184);
   box-shadow: 0 0 0 2px rgb(187, 184, 184);
+}
+.mat-ripple:not(:empty){
+  width: 300px;
+}
+.mat-tab-labels{
+color: black;
+}
+.mat-tab-label.mat-tab-label-active {
+  border-radius: 10px;
+  background-color: #ffffff !important;
+  box-shadow: 2px 4px 4px 0 rgba(82, 82, 82, 0.5);
+  margin-left: 5px;
+  opacity: 1;
+  width: 250px;
+}
+.mat-tab-labels{
+  box-shadow: 2px 4px 4px 0 rgba(82, 82, 82, 0.5);
+  background-color: #dbf5ff;
+  border-radius: 4px;
+  width: 38%;
+}
+.mat-tab-label .mat-tab-label-content{
+  color: black;
+  opacity: 2;
 }

@@ -1,7 +1,7 @@
 
 .mat-toolbar{
-    background-color: blue;
-    text-decoration-color:white;
+  background-color: #ffa601;
+  text-decoration-color:white;
 }
 .example-container {
     position: absolute;
@@ -12,8 +12,8 @@
     background: rgb(238, 238, 238);
   }
   .mat-drawer{
-      background-color: blue;
-      text-decoration-color: white;
+    background-color: blue;
+    text-decoration-color: white;
 
       color: white;
       width: 150px;
@@ -39,9 +39,15 @@
     /* Make sure the toolbar will stay on top of the content as it scrolls past. */
     z-index: 2;
   }
+  .imglogo{
+    width: 100px;
+  }
 
   h1.example-app-name {
-    margin-left: 8px;
+    font-family: 'Vollkorn', serif;
+    text-transform: uppercase;
+    font-size: 30px;
+    margin-top: 4px;
   }
 
   .example-sidenav-container {
@@ -65,7 +71,9 @@
    margin-top: 12px;
 
  }
-
+ .mat-toolbar-row, .mat-toolbar-single-row{
+  height: 80px;
+}
 .mat-header {
     align-items: center;
   }

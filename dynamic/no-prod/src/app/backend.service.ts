@@ -31,6 +31,9 @@ export class BackendService {
   deleteProjectID(a){
     return this.http.get<any>(this.baseurl + `/deleteprojectID/${a}`);
   }
+  deleteaudioProjectID(a){
+    return this.http.get<any>(this.baseurl + `/deleteaudioprojectID/${a}`);
+  }
 
 
 

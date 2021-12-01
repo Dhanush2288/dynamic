@@ -4,6 +4,7 @@ import {
   ViewChild,
   ElementRef,
   TemplateRef,
+  ViewEncapsulation
 } from "@angular/core";
 import { BackendService } from "src/app/backend.service";
 import { MatPaginator } from "@angular/material/paginator";
@@ -21,6 +22,8 @@ import swal from 'sweetalert2';
   selector: "app-view-dashboard",
   templateUrl: "./view-dashboard.component.html",
   styleUrls: ["./view-dashboard.component.css"],
+  encapsulation: ViewEncapsulation.None,
+
 })
 export class ViewDashboardComponent implements OnInit {
   Dated: any;
@@ -178,6 +181,80 @@ export class ViewDashboardComponent implements OnInit {
               this.service.getprojectID().subscribe(
                 (success) => {
                   this.ID = success.data.projectID;
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+              swal.fire(
+
+                'Deleted!',
+
+                'Your ProjectID has been deleted.',
+
+                'success'
+
+              )
+            }else{
+              swal.fire(
+
+                'Error',
+
+                'Try agian :(',
+
+                'error'
+
+              )
+            }
+
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+
+      } else if (result.dismiss === swal.DismissReason.cancel) {
+
+        swal.fire(
+
+          'Cancelled',
+
+          'Your Project ID is safe :)',
+
+        )
+
+      }
+
+    })
+
+  }
+  confirmBox1(a){
+
+    swal.fire({
+
+      title: 'Are you sure want to remove ProjectID?',
+
+      text: `You will not be able to recover this ${a} !`,
+
+      icon: 'warning',
+
+      showCancelButton: true,
+
+      confirmButtonText: 'Yes, delete it!',
+
+      cancelButtonText: 'No, keep it'
+
+    }).then((result) => {
+
+      if (result.value) {
+        this.service.deleteaudioProjectID(a).subscribe(
+          (success) => {
+            if(success.success){
+              this.service.getprojectID1().subscribe(
+                (success) => {
+                  this.ID1 = success.data.projectID;
+                  this.getfav("", this.selectedDate1);
                 },
                 (error) => {
                   console.log(error);
